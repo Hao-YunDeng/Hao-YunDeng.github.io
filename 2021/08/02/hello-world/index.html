@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Haoyun Deng">
+    <meta name="keywords" content="Web Development Fundamentals, Haoyun Deng">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Haoyun Deng</title>
+    <title>Web Development Fundamentals | Haoyun Deng</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Web Development Fundamentals</h1>
                 </div>
             </div>
         </div>
@@ -459,24 +459,51 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+                <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="HTML-CSS-and-JavaScript"><a href="#HTML-CSS-and-JavaScript" class="headerlink" title="HTML, CSS and JavaScript"></a>HTML, CSS and JavaScript</h3><p>To learn the basic technologies of web front-end development, you need to master: HTML, CSS, and JavaScript languages. Let’s take a look at what these three technologies are used to achieve:</p>
+<ol>
+<li><p>HTML is the carrier of web content. Content is the information that webpage creators put on the page for users to browse. It can include text, pictures, videos, etc.</p>
+</li>
+<li><p>CSS style is performance. It’s like the coat of the web. For example, the title font, color changes, or adding background images, borders, etc. to the title. All these things used to change the appearance of content are called performance.</p>
+</li>
+<li><p>JavaScript is used to achieve special effects on web pages. Such as: mouse over the pop-up drop-down menu. Or mouse over the background color of the table to change. There is also a rotation of focus news (news pictures). It can be understood that animations and interactions are generally implemented with JavaScript.</p>
+</li>
+</ol>
+<p>HTML example:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">></span>
+  <span class="token operator">&lt;</span>html<span class="token operator">></span>
+    <span class="token operator">&lt;</span>head<span class="token operator">></span>
+      <span class="token operator">&lt;</span>title<span class="token operator">></span>Your Title<span class="token operator">&lt;</span>/title<span class="token operator">></span>
+    <span class="token operator">&lt;</span>/head<span class="token operator">></span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    <span class="token operator">&lt;</span>body<span class="token operator">></span>
+      Your text<span class="token punctuation">..</span>.
+    <span class="token operator">&lt;</span>/body<span class="token operator">></span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+  <span class="token operator">&lt;</span>/html<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>CSS example:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">body <span class="token punctuation">&#123;</span>
+  background-color: lightblue<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+h1 <span class="token punctuation">&#123;</span>
+  color: white<span class="token punctuation">;</span>
+  text-align: center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+p <span class="token punctuation">&#123;</span>
+  font-family: verdana<span class="token punctuation">;</span>
+  font-size: 20px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/tag_doctype.asp">W3school</a></p>
 
                 
             </div>
@@ -590,9 +617,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="My First Post">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Bootstrap">
                         
-                        <span class="card-title">My First Post</span>
+                        <span class="card-title">Bootstrap</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -627,9 +654,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Web Development Fundamentals">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">Web Development Fundamentals</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -817,13 +844,13 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/Hao-YunDeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:haoyundeng94@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -833,7 +860,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1339685391" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1339685391" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
