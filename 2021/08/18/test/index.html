@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="React.js and Hooks, Haoyun Deng">
+    <meta name="keywords" content="test, Haoyun Deng">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>React.js and Hooks | Haoyun Deng</title>
+    <title>test | Haoyun Deng</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">React.js and Hooks</h1>
+                    <h1 class="description center-align post-title">test</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-08-07
+                    2021-08-18
                 </div>
                 
 
@@ -467,36 +467,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="React-and-Hooks-in-React"><a href="#React-and-Hooks-in-React" class="headerlink" title="React and Hooks in React"></a>React and Hooks in React</h3><p>React is a functional approach to user interface (UI): UI = f(state). React Hooks is a new feature introduced in React 16.7.0-alpha version.</p>
-<p>In order to understand what React Hooks are faster, first look at the following renderProps code:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token builtin class-name">return</span> <span class="token punctuation">(</span>
-    <span class="token operator">&lt;</span>Toggle <span class="token assign-left variable">initial</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>false<span class="token punctuation">&#125;</span><span class="token operator">></span>
-      <span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> on, toggle <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>
-        <span class="token operator">&lt;</span>Button <span class="token assign-left variable">type</span><span class="token operator">=</span><span class="token string">"primary"</span> <span class="token assign-left variable">onClick</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>toggle<span class="token punctuation">&#125;</span><span class="token operator">></span> Open Modal <span class="token operator">&lt;</span>/Button<span class="token operator">></span>
-        <span class="token operator">&lt;</span>Modal <span class="token assign-left variable">visible</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>on<span class="token punctuation">&#125;</span> <span class="token assign-left variable">onOk</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>toggle<span class="token punctuation">&#125;</span> <span class="token assign-left variable">onCancel</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>toggle<span class="token punctuation">&#125;</span> /<span class="token operator">></span>
-      <span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
-    <span class="token operator">&lt;</span>/Toggle<span class="token operator">></span>
-  <span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>And the same code using Hooks</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  const <span class="token punctuation">[</span>open, setOpen<span class="token punctuation">]</span> <span class="token operator">=</span> useState<span class="token punctuation">(</span>false<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token builtin class-name">return</span> <span class="token punctuation">(</span>
-    <span class="token operator">&lt;></span>
-      <span class="token operator">&lt;</span>Button <span class="token assign-left variable">type</span><span class="token operator">=</span><span class="token string">"primary"</span> <span class="token assign-left variable">onClick</span><span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> setOpen<span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token operator">></span>
-        Open Modal
-      <span class="token operator">&lt;</span>/Button<span class="token operator">></span>
-      <span class="token operator">&lt;</span>Modal
-        <span class="token assign-left variable">visible</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>open<span class="token punctuation">&#125;</span>
-        <span class="token assign-left variable">onOk</span><span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> setOpen<span class="token punctuation">(</span>false<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
-        <span class="token assign-left variable">onCancel</span><span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> setOpen<span class="token punctuation">(</span>false<span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
-      /<span class="token operator">></span>
-    <span class="token operator">&lt;</span>/<span class="token operator">></span>
-  <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Features-of-React-Hooks"><a href="#Features-of-React-Hooks" class="headerlink" title="Features of React Hooks"></a>Features of React Hooks</h2><p> The benefits of React Hooks are not only “more FP, finer update granularity, and clearer code”, but also the following three characteristics: multiple states will not be nested, and the writing method is still flat (renderProps can Solved by compose, not only the use is slightly cumbersome, but also the number of entities is increased due to the forced encapsulation of a new object). Hooks can reference other Hooks. It is easier to separate the UI and state of the component.</p>
+                <h3 id="test"><a href="#test" class="headerlink" title="test"></a>test</h3><img src = "malong.jpg">
 
                 
             </div>
@@ -523,7 +494,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://Hao-YunDeng.github.io/2021/08/07/React-js-and-Hooks/">https://Hao-YunDeng.github.io/2021/08/07/React-js-and-Hooks/</a>
+                    <a href="https://Hao-YunDeng.github.io/2021/08/18/test/">https://Hao-YunDeng.github.io/2021/08/18/test/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -602,9 +573,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/2021/08/18/test/">
                     <div class="card-image">
@@ -622,9 +594,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -633,6 +605,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -643,13 +616,13 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/07/Dtabase-MongoDB-and-Mongoose/">
+                <a href="/2021/08/07/React-js-and-Hooks/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Dtabase: MongoDB and Mongoose">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="React.js and Hooks">
                         
-                        <span class="card-title">Dtabase: MongoDB and Mongoose</span>
+                        <span class="card-title">React.js and Hooks</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
