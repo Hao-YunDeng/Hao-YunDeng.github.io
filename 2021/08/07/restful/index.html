@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Dtabase: SQL, Haoyun Deng">
+    <meta name="keywords" content="Restful API, Haoyun Deng">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Dtabase: SQL | Haoyun Deng</title>
+    <title>Restful API | Haoyun Deng</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/post_cover/node.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Dtabase: SQL</h1>
+                    <h1 class="description center-align post-title">Restful API</h1>
                 </div>
             </div>
         </div>
@@ -467,12 +467,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><h2 id="What-is-SQL"><a href="#What-is-SQL" class="headerlink" title="What is SQL?"></a>What is SQL?</h2><p>Structured Query Language (Structured Query Language) referred to as SQL, is a special purpose programming language, a database query and programming language, used to access data and query, update and manage relational database systems.</p>
-<h2 id="SQL-Features"><a href="#SQL-Features" class="headerlink" title="SQL Features"></a>SQL Features</h2><ol>
-<li>SQL is not a proprietary language of a particular database vendor. Almost all DBMSs support SQL</li>
-<li>SQL is easy to learn. Its sentences are composed of simple and descriptive English words. </li>
-<li>Although SQL is simple, it is actually a very powerful language. With flexible use of language elements, complex and advanced database operations can be performed.</li>
-</ol>
+                <h2 id="Express-Eaxmple"><a href="#Express-Eaxmple" class="headerlink" title="Express Eaxmple"></a>Express Eaxmple</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">const express <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const app <span class="token operator">=</span> express<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const port <span class="token operator">=</span> <span class="token number">3000</span><span class="token punctuation">;</span>
+
+app.get<span class="token punctuation">(</span><span class="token string">'/'</span>, <span class="token punctuation">(</span>req, res<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+  res.send<span class="token punctuation">(</span><span class="token string">'Hello World!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.listen<span class="token punctuation">(</span>port, <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+  console.log<span class="token punctuation">(</span><span class="token variable"><span class="token variable">`</span>Example app listening at http://localhost:$<span class="token punctuation">&#123;</span>port<span class="token punctuation">&#125;</span><span class="token variable">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -499,7 +504,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://Hao-YunDeng.github.io/2021/08/07/Dtabase-SQL/">https://Hao-YunDeng.github.io/2021/08/07/Dtabase-SQL/</a>
+                    <a href="https://Hao-YunDeng.github.io/2021/08/07/restful/">https://Hao-YunDeng.github.io/2021/08/07/restful/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -582,13 +587,12 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2021/08/07/Dtabase-MongoDB-and-Mongoose/">
+                <a href="/2021/08/07/Database-MongoDB-and-Mongoose/">
                     <div class="card-image">
                         
+                        <img src="/images/post_cover/mongodb.webp" class="responsive-img" alt="Database: MongoDB">
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Dtabase: MongoDB and Mongoose">
-                        
-                        <span class="card-title">Dtabase: MongoDB and Mongoose</span>
+                        <span class="card-title">Database: MongoDB</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -616,16 +620,15 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
+                Current&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/07/EJS/">
+                <a href="/2021/08/07/restful/">
                     <div class="card-image">
                         
+                        <img src="/images/post_cover/node.png" class="responsive-img" alt="Restful API">
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="EJS">
-                        
-                        <span class="card-title">EJS</span>
+                        <span class="card-title">Restful API</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -646,6 +649,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>

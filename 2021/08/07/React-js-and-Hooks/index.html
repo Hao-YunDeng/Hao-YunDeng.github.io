@@ -310,7 +310,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/post_cover/react.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -468,7 +468,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h3 id="React-and-Hooks-in-React"><a href="#React-and-Hooks-in-React" class="headerlink" title="React and Hooks in React"></a>React and Hooks in React</h3><p>React is a functional approach to user interface (UI): UI = f(state). React Hooks is a new feature introduced in React 16.7.0-alpha version.</p>
-<p>In order to understand what React Hooks are faster, first look at the following renderProps code:</p>
+<p>In order to understand what React Hooks are faster, first look at the following code:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token builtin class-name">return</span> <span class="token punctuation">(</span>
     <span class="token operator">&lt;</span>Toggle <span class="token assign-left variable">initial</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>false<span class="token punctuation">&#125;</span><span class="token operator">></span>
@@ -496,7 +496,55 @@
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="Features-of-React-Hooks"><a href="#Features-of-React-Hooks" class="headerlink" title="Features of React Hooks"></a>Features of React Hooks</h2><p> The benefits of React Hooks are not only “more FP, finer update granularity, and clearer code”, but also the following three characteristics: multiple states will not be nested, and the writing method is still flat (renderProps can Solved by compose, not only the use is slightly cumbersome, but also the number of entities is increased due to the forced encapsulation of a new object). Hooks can reference other Hooks. It is easier to separate the UI and state of the component.</p>
+<h2 id="Features-of-React-Hooks"><a href="#Features-of-React-Hooks" class="headerlink" title="Features of React Hooks"></a>Features of React Hooks</h2><p>The benefits of React Hooks are not only “finer update granularity, and clearer code”, but also the following characteristics: multiple states will not be nested, the writing method is still flat, and it is easier to separate the UI and state of the component.</p>
+<h2 id="Keeper-App-A-Note-Taking-service"><a href="#Keeper-App-A-Note-Taking-service" class="headerlink" title="Keeper App: A Note-Taking service"></a>Keeper App: A Note-Taking service</h2><img src = "1.png">
+<img src = "2.png">
+<img src = "3.png">
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">import</span> React, <span class="token punctuation">&#123;</span> useState <span class="token punctuation">&#125;</span> from <span class="token string">"react"</span><span class="token punctuation">;</span>
+<span class="token function">import</span> Header from <span class="token string">"./Header"</span><span class="token punctuation">;</span>
+<span class="token function">import</span> Footer from <span class="token string">"./Footer"</span><span class="token punctuation">;</span>
+<span class="token function">import</span> Note from <span class="token string">"./Note"</span><span class="token punctuation">;</span>
+<span class="token function">import</span> CreateArea from <span class="token string">"./CreateArea"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  const <span class="token punctuation">[</span>notes, setNotes<span class="token punctuation">]</span> <span class="token operator">=</span> useState<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> addNote<span class="token punctuation">(</span>newNote<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    setNotes<span class="token punctuation">(</span>prevNotes <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+      <span class="token builtin class-name">return</span> <span class="token punctuation">[</span><span class="token punctuation">..</span>.prevNotes, newNote<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> deleteNote<span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    setNotes<span class="token punctuation">(</span>prevNotes <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+      <span class="token builtin class-name">return</span> prevNotes.filter<span class="token punctuation">((</span>noteItem, index<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+        <span class="token builtin class-name">return</span> index <span class="token operator">!=</span><span class="token operator">=</span> <span class="token function">id</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token builtin class-name">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Header /<span class="token operator">></span>
+      <span class="token operator">&lt;</span>CreateArea <span class="token assign-left variable">onAdd</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>addNote<span class="token punctuation">&#125;</span> /<span class="token operator">></span>
+      <span class="token punctuation">&#123;</span>notes.map<span class="token punctuation">((</span>noteItem, index<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+        <span class="token builtin class-name">return</span> <span class="token punctuation">(</span>
+          <span class="token operator">&lt;</span>Note
+            <span class="token assign-left variable">key</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>index<span class="token punctuation">&#125;</span>
+            <span class="token assign-left variable">id</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>index<span class="token punctuation">&#125;</span>
+            <span class="token assign-left variable">title</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>noteItem.title<span class="token punctuation">&#125;</span>
+            <span class="token assign-left variable">content</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>noteItem.content<span class="token punctuation">&#125;</span>
+            <span class="token assign-left variable">onDelete</span><span class="token operator">=</span><span class="token punctuation">&#123;</span>deleteNote<span class="token punctuation">&#125;</span>
+          /<span class="token operator">></span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">&lt;</span>Footer /<span class="token operator">></span>
+    <span class="token operator">&lt;</span>/div<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token builtin class-name">export</span> default App<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -602,16 +650,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2021/08/18/test/">
+                <a href="/2021/08/07/React-js-and-Hooks/">
                     <div class="card-image">
                         
-                        <img src="/images/post_cover/malong.jpg" class="responsive-img" alt="test">
+                        <img src="/images/post_cover/react.jpg" class="responsive-img" alt="React.js and Hooks">
                         
-                        <span class="card-title">test</span>
+                        <span class="card-title">React.js and Hooks</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -621,9 +670,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -632,6 +681,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -642,13 +692,12 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/07/Dtabase-MongoDB-and-Mongoose/">
+                <a href="/2021/08/07/Database-MongoDB-and-Mongoose/">
                     <div class="card-image">
                         
+                        <img src="/images/post_cover/mongodb.webp" class="responsive-img" alt="Database: MongoDB">
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Dtabase: MongoDB and Mongoose">
-                        
-                        <span class="card-title">Dtabase: MongoDB and Mongoose</span>
+                        <span class="card-title">Database: MongoDB</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
