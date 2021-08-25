@@ -467,7 +467,43 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="API-Application-Programming-Interface"><a href="#API-Application-Programming-Interface" class="headerlink" title="API: Application Programming Interface"></a>API: Application Programming Interface</h2><p>Application Programming Interface (API) is used by programmers when programming. Through this interface, systems and applications can access resources in the system and obtain operating system services during execution. The program interface of most operating systems is composed of a set of system calls, each system call is a subroutine that can complete a specific function.</p>
+<h2 id="Newsletter-sign-up-applications"><a href="#Newsletter-sign-up-applications" class="headerlink" title="Newsletter sign-up applications"></a>Newsletter sign-up applications</h2><img src = "1.png">
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">const express <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const bodyParser <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"bodyParser"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const request <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"request"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+const app <span class="token operator">=</span> express<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.use<span class="token punctuation">(</span>express.static<span class="token punctuation">(</span><span class="token string">"public"</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+app.use<span class="token punctuation">(</span>bodyParser.urlencoded<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>extended: true<span class="token punctuation">&#125;</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+
+app.get<span class="token punctuation">(</span><span class="token string">"/"</span>, function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  res.sendFile<span class="token punctuation">(</span>__dirname + <span class="token string">"/signup.html"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.post<span class="token punctuation">(</span><span class="token string">"/"</span>, function<span class="token punctuation">(</span>req, res<span class="token punctuation">))</span> <span class="token punctuation">&#123;</span>
+  const firstName <span class="token operator">=</span> req.body.fName<span class="token punctuation">;</span>
+  const lastName <span class="token operator">=</span> req.body.lName<span class="token punctuation">;</span>
+  const email <span class="token operator">=</span> req.body.email<span class="token punctuation">;</span>
+
+  const data <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    members: <span class="token punctuation">[</span>
+      <span class="token punctuation">&#123;</span>
+        email_address: email,
+        status: <span class="token string">"subscribed"</span>,
+        merge_fields: <span class="token punctuation">&#123;</span>
+          FNAME: firstName,
+          LNAME: lastName
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  const jsonData <span class="token operator">=</span> JSON.stingify<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>

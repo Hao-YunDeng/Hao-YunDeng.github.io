@@ -469,7 +469,145 @@
             <div id="articleContent">
                 <h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><p>MongoDB is an open source product between relational and non-relational databases, and is the NoSQL database closest to relational databases. It is extended on the basis of lightweight JSON exchange, which is called BSON to describe its unstructured data types. However, it can also store more complex data types.</p>
 <h3 id="Mongoose"><a href="#Mongoose" class="headerlink" title="Mongoose"></a>Mongoose</h3><p>mongoose is an ODM (Object Data Model) library, also called object data model. So why is it an object data model? Note: MongoDB or Mongo is a NoSQL database, which means it is a non-relational database. It is used to process data and realize conversion between objects. Data processing: Create a Schema and provide the data validation function of the Schema. Object conversion: These objects refer to the objects created during the development process and the corresponding objects represented in MongodDB.</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+<h3 id="TO-DO-List-App"><a href="#TO-DO-List-App" class="headerlink" title="TO-DO-List App"></a>TO-DO-List App</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">const express <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const bodyParser <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"body-parser"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const mongoose <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"mongoose"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const _ <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"lodash"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const app <span class="token operator">=</span> express<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.set<span class="token punctuation">(</span><span class="token string">'view engine'</span>, <span class="token string">'ejs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.use<span class="token punctuation">(</span>bodyParser.urlencoded<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>extended: true<span class="token punctuation">&#125;</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+app.use<span class="token punctuation">(</span>express.static<span class="token punctuation">(</span><span class="token string">"public"</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+
+mongoose.connect<span class="token punctuation">(</span><span class="token string">"mongodb://localhost:27017/todolistDB"</span>, <span class="token punctuation">&#123;</span>useNewUrlParser: true<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const itemsSchema <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  name: String
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+const Item <span class="token operator">=</span> mongoose.model<span class="token punctuation">(</span><span class="token string">"Item"</span>, itemsSchema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+const item1 <span class="token operator">=</span> new Item<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  name: <span class="token string">"Welcome to your todolist!"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const item2 <span class="token operator">=</span> new Item<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  name: <span class="token string">"Hit the + button to add a new item."</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const item3 <span class="token operator">=</span> new Item<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  name: <span class="token string">"&lt;-- Hit this to delete an item."</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const defaultItems <span class="token operator">=</span> <span class="token punctuation">[</span>item1, item2, item3<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+const listSchema <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  name: String,
+  items: <span class="token punctuation">[</span>itemsSchema<span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+const List <span class="token operator">=</span> mongoose.model<span class="token punctuation">(</span><span class="token string">"List"</span>, listSchema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+app.get<span class="token punctuation">(</span><span class="token string">"/"</span>, function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+  Item.find<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>, function<span class="token punctuation">(</span>err, foundItems<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>foundItems.length <span class="token operator">==</span><span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      Item.insertMany<span class="token punctuation">(</span>defaultItems, function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          console.log<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+          console.log<span class="token punctuation">(</span><span class="token string">"Successfully savevd default items to DB."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      res.redirect<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      res.render<span class="token punctuation">(</span><span class="token string">"list"</span>, <span class="token punctuation">&#123;</span>listTitle: <span class="token string">"Today"</span>, newListItems: foundItems<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.get<span class="token punctuation">(</span><span class="token string">"/:customListName"</span>, function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  const customListName <span class="token operator">=</span> _.capitalize<span class="token punctuation">(</span>req.params.customListName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  List.findOne<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>name: customListName<span class="token punctuation">&#125;</span>, function<span class="token punctuation">(</span>err, foundList<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>foundList<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        //Create a new list
+        const list <span class="token operator">=</span> new List<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+          name: customListName,
+          items: defaultItems
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        list.save<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        res.redirect<span class="token punctuation">(</span><span class="token string">"/"</span> + customListName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        //Show an existing list
+
+        res.render<span class="token punctuation">(</span><span class="token string">"list"</span>, <span class="token punctuation">&#123;</span>listTitle: foundList.name, newListItems: foundList.items<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.post<span class="token punctuation">(</span><span class="token string">"/"</span>, function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+  const itemName <span class="token operator">=</span> req.body.newItem<span class="token punctuation">;</span>
+  const listName <span class="token operator">=</span> req.body.list<span class="token punctuation">;</span>
+
+  const item <span class="token operator">=</span> new Item<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    name: itemName
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>listName <span class="token operator">==</span><span class="token operator">=</span> <span class="token string">"Today"</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    item.save<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    res.redirect<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    List.findOne<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>name: listName<span class="token punctuation">&#125;</span>, function<span class="token punctuation">(</span>err, foundList<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      foundList.items.push<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      foundList.save<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      res.redirect<span class="token punctuation">(</span><span class="token string">"/"</span> + listName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.post<span class="token punctuation">(</span><span class="token string">"/delete"</span>, function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  const checkedItemId <span class="token operator">=</span> req.body.checkbox<span class="token punctuation">;</span>
+  const listName <span class="token operator">=</span> req.body.listName<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>listName <span class="token operator">==</span><span class="token operator">=</span> <span class="token string">"Today"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    Item.findByIdAndRemove<span class="token punctuation">(</span>checkedItemId, function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        console.log<span class="token punctuation">(</span><span class="token string">"Successfully deleted checked item."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        res.redirect<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    List.findOneAndUpdate<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>name: listName<span class="token punctuation">&#125;</span>, <span class="token punctuation">&#123;</span><span class="token variable">$pull</span><span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span>items: <span class="token punctuation">&#123;</span>_id: checkedItemId<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>, function<span class="token punctuation">(</span>err, foundList<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        res.redirect<span class="token punctuation">(</span><span class="token string">"/"</span> + listName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.get<span class="token punctuation">(</span><span class="token string">"/about"</span>, function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  res.render<span class="token punctuation">(</span><span class="token string">"about"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.listen<span class="token punctuation">(</span><span class="token number">3000</span>, <span class="token function-name function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console.log<span class="token punctuation">(</span><span class="token string">"Server started on port 3000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>

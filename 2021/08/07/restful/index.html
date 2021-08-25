@@ -478,6 +478,133 @@ app.get<span class="token punctuation">(</span><span class="token string">'/'</s
 app.listen<span class="token punctuation">(</span>port, <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
   console.log<span class="token punctuation">(</span><span class="token variable"><span class="token variable">`</span>Example app listening at http://localhost:$<span class="token punctuation">&#123;</span>port<span class="token punctuation">&#125;</span><span class="token variable">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Wikipedia-style-API"><a href="#Wikipedia-style-API" class="headerlink" title="Wikipedia-style API"></a>Wikipedia-style API</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">const express <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const bodyParser <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"body-parser"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const ejs <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"ejs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+const mongoose <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const app <span class="token operator">=</span> express<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.set<span class="token punctuation">(</span><span class="token string">'view engine'</span>, <span class="token string">'ejs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app.use<span class="token punctuation">(</span>bodyParser.urlencoded<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  extended: <span class="token boolean">true</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+app.use<span class="token punctuation">(</span>express.static<span class="token punctuation">(</span><span class="token string">"public"</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+
+mongoose.connect<span class="token punctuation">(</span><span class="token string">"mongodb://localhost:27017/wikiDB"</span>, <span class="token punctuation">&#123;</span>useNewUrlParser: true<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const articleSchema <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  title: String,
+  content: String
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+const Article <span class="token operator">=</span> mongoose.model<span class="token punctuation">(</span><span class="token string">"Article"</span>, articleSchema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+///////////////////////////////////Requests Targetting all Articles////////////////////////
+
+app.route<span class="token punctuation">(</span><span class="token string">"/articles"</span><span class="token punctuation">)</span>
+
+.get<span class="token punctuation">(</span>function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  Article.find<span class="token punctuation">(</span>function<span class="token punctuation">(</span>err, foundArticles<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      res.send<span class="token punctuation">(</span>foundArticles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      res.send<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+.post<span class="token punctuation">(</span>function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+  const newArticle <span class="token operator">=</span> new Article<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    title: req.body.title,
+    content: req.body.content
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  newArticle.save<span class="token punctuation">(</span>function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      res.send<span class="token punctuation">(</span><span class="token string">"Successfully added a new article."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      res.send<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+.delete<span class="token punctuation">(</span>function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+  Article.deleteMany<span class="token punctuation">(</span>function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      res.send<span class="token punctuation">(</span><span class="token string">"Successfully deleted all articles."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      res.send<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+////////////////////////////////Requests Targetting A Specific Article////////////////////////
+
+app.route<span class="token punctuation">(</span><span class="token string">"/articles/:articleTitle"</span><span class="token punctuation">)</span>
+
+.get<span class="token punctuation">(</span>function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+  Article.findOne<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>title: req.params.articleTitle<span class="token punctuation">&#125;</span>, function<span class="token punctuation">(</span>err, foundArticle<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>foundArticle<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      res.send<span class="token punctuation">(</span>foundArticle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      res.send<span class="token punctuation">(</span><span class="token string">"No articles matching that title was found."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+.put<span class="token punctuation">(</span>function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+  Article.update<span class="token punctuation">(</span>
+    <span class="token punctuation">&#123;</span>title: req.params.articleTitle<span class="token punctuation">&#125;</span>,
+    <span class="token punctuation">&#123;</span>title: req.body.title, content: req.body.content<span class="token punctuation">&#125;</span>,
+    <span class="token punctuation">&#123;</span>overwrite: true<span class="token punctuation">&#125;</span>,
+    function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      if<span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        res.send<span class="token punctuation">(</span><span class="token string">"Successfully updated the selected article."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+.patch<span class="token punctuation">(</span>function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+  Article.update<span class="token punctuation">(</span>
+    <span class="token punctuation">&#123;</span>title: req.params.articleTitle<span class="token punctuation">&#125;</span>,
+    <span class="token punctuation">&#123;</span><span class="token variable">$set</span><span class="token builtin class-name">:</span> req.body<span class="token punctuation">&#125;</span>,
+    function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      if<span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        res.send<span class="token punctuation">(</span><span class="token string">"Successfully updated article."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        res.send<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+.delete<span class="token punctuation">(</span>function<span class="token punctuation">(</span>req, res<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+  Article.deleteOne<span class="token punctuation">(</span>
+    <span class="token punctuation">&#123;</span>title: req.params.articleTitle<span class="token punctuation">&#125;</span>,
+    function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        res.send<span class="token punctuation">(</span><span class="token string">"Successfully deleted the corresponding article."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        res.send<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+app.listen<span class="token punctuation">(</span><span class="token number">3000</span>, <span class="token function-name function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console.log<span class="token punctuation">(</span><span class="token string">"Server started on port 3000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
